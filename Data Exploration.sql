@@ -29,44 +29,43 @@ JOIN corruption c ON u.country = c.country
 -- Join corruption and unemployment data to find average unemployment rate by corruption index.
 
 
-    SELECT 
+SELECT 
   c.corruption_index, 
-  AVG(u.unemployment_rate) AS avg_unemployment_rate
+  AVG(CAST(u.unemployment_rate AS DECIMAL(10,2))) AS avg_unemployment_rate
 FROM corruption c
 INNER JOIN unemployment u 
   ON c.country = u.country 
 GROUP BY c.corruption_index
-ORDER BY c.corruption_index
+ORDER BY c.corruption_index;
     
 -- Calculate tourism revenue as percentage of GDP to identify most tourism dependent countries.
 
 SELECT 
   t.country,
-  t.receipts_in_billions / rc.gdp_per_capita * 100 AS tourism_pct_gdp
+  t.receipts_in_billions / CAST(rc.gdp_per_capita AS DECIMAL(10,2)) * 100 AS tourism_pct_gdp
 FROM tourism t
 INNER JOIN richest_countries rc
   ON t.country = rc.country
-ORDER BY tourism_pct_gdp DESC
+ORDER BY tourism_pct_gdp DESC;
 
 -- Join cost of living and GDP per capita and calculate purchasing power index as percentage of GDP per capita
 
 SELECT
   col.country,
-  col.purchasing_power_index / rc.gdp_per_capita * 100 AS purchase_power_pct_gdp
+  col.purchasing_power_index / CAST(rc.gdp_per_capita AS DECIMAL(10,2)) * 100 AS purchase_power_pct_gdp
 FROM cost_of_living col
 INNER JOIN richest_countries rc
   ON col.country = rc.country
-ORDER BY purchase_power_pct_gdp DESC
+ORDER BY purchase_power_pct_gdp DESC;
 
--- Average corruption index by region
 
-SELECT
-  region,
-  AVG(c.corruption_index) AS avg_corruption_index
+-- Average corruption index by country
+
+SELECT 
+  c.country,
+  AVG(CAST(c.corruption_index AS float)) AS avg_corruption_index
 FROM corruption c
-INNER JOIN countries cnt
-  ON c.country = cnt.country
-GROUP BY region
+GROUP BY c.country
 ORDER BY avg_corruption_index
 
 -- Rank countries by receipts per tourist
@@ -82,11 +81,10 @@ ORDER BY receipts_per_tourist DESC
 SELECT
   c1.country AS country1,
   c2.country AS country2,
-  c1.year,
-  c1.unemployment_rate AS rate1, 
-  c2.unemployment_rate AS rate2,
-  c1.unemployment_rate - c2.unemployment_rate AS rate_diff
+  CAST(c1.unemployment_rate AS decimal(5,2)) AS rate1, 
+  CAST(c2.unemployment_rate AS decimal(5,2)) AS rate2,
+  CAST(c1.unemployment_rate AS decimal(5,2)) - CAST(c2.unemployment_rate AS decimal(5,2)) AS rate_diff
 FROM unemployment c1
 INNER JOIN unemployment c2
-  ON c1.year = c2.year AND c1.country <> c2.country
-ORDER BY year
+  ON c1.country <> c2.country
+ORDER BY c1.country
