@@ -1,7 +1,7 @@
 # Exploring Global Socioeconomic Data 
 
 ## Introduction:
-This project aims to analyze data sources (https://www.kaggle.com/datasets/madhurpant/world-economic-data) to gain insights into global economics, corruption, tourism, and standard of living. The goal is to identify relationships between metrics like GDP, corruption, unemployment, and cost of living. These insights can help guide business expansion decisions and economic policy.
+This project aims to analyze data sources to gain insights into global economics, corruption, tourism, and standard of living. The goal is to identify relationships between metrics like GDP, corruption, unemployment, and cost of living. These insights can help guide business expansion decisions and economic policy.
 
 ## Data Overview:
 The data covers about 100 countries with key metrics like GDP per capita, tourism revenue, unemployment rates, corruption index, and cost of living index. 
