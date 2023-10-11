@@ -23,7 +23,7 @@ SQL queries will join data sources by country to uncover insights. Aggregate fun
 10. Unemployment rate differences between countries by year
 
 ## insights
-•	Countries with higher corruption indices tend to have higher unemployment
-•	Europe has the lowest average corruption index by region
-•	Tourism revenue accounts for over 15% of GDP in the most tourism dependent countries
+- Countries with higher corruption indices tend to have higher unemployment
+- Europe has the lowest average corruption index by region
+- Tourism revenue accounts for over 15% of GDP in the most tourism dependent countries
 
